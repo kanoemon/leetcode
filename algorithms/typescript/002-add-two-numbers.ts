@@ -11,27 +11,20 @@
  */
 
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    const l1joined = toArray(l1, []).reverse().join('');
-    const l2joined = toArray(l2, []).reverse().join('');
-    const sum = Number(l1joined) + Number(l2joined);
-    const resultArray = sum.toString().split('');
+    const sum: number = Number(toArray(l1, []).reverse().join('')) 
+                + Number(toArray(l2, []).reverse().join(''));
+    const sumArray: string[] = sum.toString().split('');
     
-    for(let i = 0; i < resultArray.length; i++) {
-        if (i === 0) {
-            var currentListNode = new ListNode(Number(resultArray[i]), null);
-            var beforeListNode = currentListNode;
-        } else {
-            var currentlistNode = new ListNode(Number(resultArray[i]), beforeListNode);
-        }
+    let result: ListNode | null = null;
+    let beforeListNode: ListNode | null = null;
+    for(let i: number = 0; i < sumArray.length; i++) {
+        result = beforeListNode = new ListNode(Number(sumArray[i]), beforeListNode);
     }
-    console.log(currentListNode);
-    return null;
+    return result;
 };
 
-function toArray(target: ListNode | null, result) {
+function toArray(target: ListNode | null, result: number[]): number[] {
     result.push(target.val);
-    if (target.next !== null) {
-        toArray(target.next, result);
-    }
+    if (target.next !== null) toArray(target.next, result);
     return result;
 };
