@@ -10,44 +10,32 @@
  * }
  */
 
-function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    const l1Array: number[] = toArray(l1, []);
-    const l2Array: number[] = toArray(l2, []);
-    const largerArray: number[] = l1Array.length >= l2Array.length ? l1Array : l2Array;
-    const smallArray: number[] = l1Array.length < l2Array.length ? l1Array : l2Array;
-    
-    let sumResult = [];
-    let numToAdd: number = 0;
-    let sum = 0;
-    for (let i = 0; i < largerArray.length; i++) {
-        if (smallArray[i] === undefined) {
-            sum = largerArray[i] + numToAdd;
+const addTwoNumbers = function(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+    let tl1: ListNode | null = l1, 
+        tl2: ListNode | null = l2,
+        carry: number = 0,
+        node: ListNode | null = null,
+        curNode: ListNode | null = null;
+
+    while(tl1 !== null || tl2 !== null) {
+        let val1: number = tl1 === null ? 0 : tl1.val;
+        let val2: number = tl2 === null ? 0 : tl2.val;
+        let sum: number = val1 + val2 + carry;
+        carry = Math.floor(sum / 10);
+        
+        if (node === null) {
+            node = new ListNode(sum % 10);
+            curNode = node;
         } else {
-            sum = largerArray[i] + smallArray[i] + numToAdd;
+            curNode.next = new ListNode(sum % 10);
+            curNode = curNode.next;
         }
         
-        const sumForResult = sum.toString().length === 1 ? sum : Number(sum.toString().slice(-1));
-        
-        numToAdd = sum.toString().length === 1 ? 0 : 1;
-
-        sumResult.push(sumForResult);
+        tl1 = tl1 === null ? null : tl1.next;
+        tl2 = tl2 === null ? null : tl2.next;
     }
     
-    if (numToAdd) sumResult.push(1);
-            
-    let result: ListNode | null = null;
-    let beforeListNode: ListNode | null = null;
-    
-    sumResult.reverse();
-    for(let i: number = 0; i < sumResult.length; i++) {
-        result = beforeListNode = new ListNode(Number(sumResult[i]), beforeListNode);
-    }
-    return result;
-};
+    if (carry) curNode.next = new ListNode(1);
 
-
-function toArray(target: ListNode | null, result: number[]): number[] {
-    result.push(target.val);
-    if (target.next !== null) toArray(target.next, result);
-    return result;
+    return node;
 };
