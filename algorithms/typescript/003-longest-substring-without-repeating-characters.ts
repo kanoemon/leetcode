@@ -1,27 +1,28 @@
+// anviaj
 function lengthOfLongestSubstring(s: string): number {     
-    const arr2 = s.split('');
-    let result = [];
+    const arr = s.split('');
     let max = 0;
-    let temp = [];
     
-    for(let i = 0; i < arr2.length; i++) {
-        let u = temp.filter((e) => {
-            console.log(e)
-            console.log(arr2[i]);
-            return arr2[i] === e;
-        });
-        if (u.length === 0) {
-            temp.push(arr2[i]);
-            max = temp.length;
-        } else {
-            if (temp.length > max) {
-                max = temp.length;
+    if (arr.length === 1) return 1;
+    
+    for(let i: number = 0; i < arr.length; i++) {
+        for(let j: number = 0; j < arr.length; j++) {
+           
+            if (i === j) continue;
+            if (i > j) continue;
+            if (arr[i] === arr[j]) {
+                if (j - i > max) max = j - i;
+                //if (j - i > max) max = j - i;
+                //max = j - i;
+                //console.log(pwwkew);
+                break;
             }
-            //max = temp.length;
-            temp = [];
-            temp.push(arr2[i]);
+            if (j - i + 1 > max) max = j - i + 1;
         }
     }
+    
+    if (max === 0) return arr.length;
+    
     //console.log(max);
     return max;
 };
