@@ -6,11 +6,9 @@ function lengthOfLongestSubstring(s: string): number {
     for(let i: number = 0; i < arr.length; i++) {
         t.push(arr[i]);
         for(let j: number = 0; j < arr.length; j++) {
-            if (i === j) continue;
-            if (i > j) continue;
+            if (i >= j) continue;
             
-            let d = t.filter(e => e === arr[j]);
-            if (d.length > 0) break;
+            if (t.filter(e => e === arr[j]).length > 0) break;
             t.push(arr[j]);
         }
         c.push(t.length);
