@@ -1,19 +1,18 @@
 function lengthOfLongestSubstring(s: string): number {     
-    const arr = s.split('');
+    const length: number = s.length;
+    if(length <= 1) return length;
     
-    let t = [],
-        c = [];
-    for(let i: number = 0; i < arr.length; i++) {
-        t.push(arr[i]);
-        for(let j: number = 0; j < arr.length; j++) {
-            if (i >= j) continue;
-            
-            if (t.filter(e => e === arr[j]).length > 0) break;
-            t.push(arr[j]);
-        }
-        c.push(t.length);
-        t = [];
+    let x: number = 0;
+    let y: number = 1;
+    let result: number = 1;
+    while(y < length) {
+        let sub: string = s.slice(x, y);
+        let i: number = sub.indexOf(s[y]);
+        if (i !== -1) x = x + i + 1;
+        y++;
+        
+        result = y - x > result ? y - x : result; 
     }
 
-    return c.length === 0 ? 0 : Math.max(...c);
+    return result;
 };
