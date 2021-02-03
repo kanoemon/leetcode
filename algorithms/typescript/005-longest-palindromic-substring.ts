@@ -1,19 +1,21 @@
-function longestPalindrome(s: string): string {
-    let a: number = 0,
-        b: number = s.length,
+function longestPalindrome(s: string): string {  
+    let i: number = 0,
         result: string = '';
     
-    while(a < s.length) {
-        b = s.length;
-        while(a < b) {
-            let sub: string = s.substring(a, b);
-            console.log(sub);
-            if (sub === sub.split('').reverse().join('')) {
-                result = result.length > sub.length ? result : sub;
-            }
-            b--;
-        }
-        a++;   
+    while(i < s.length) {
+        let sub: string = aroundCenter(s, i, i);
+        let sub2: string = aroundCenter(s, i, i + 1);
+        result = sub.length > result.length ? sub : result;
+        result = sub2.length > result.length ? sub2 : result;
+        i++;
     }
     return result;
+};
+
+function aroundCenter(s: string, l: number, r: number) {
+    while(l >= 0 && r < s.length && s[l] === s[r]) {
+        r++;
+        l--;
+    }
+    return s.substring(l + 1, r);
 };
