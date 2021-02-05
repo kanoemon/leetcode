@@ -1,48 +1,35 @@
 function convert(s: string, numRows: number): string {
-    let result = [];
-    let i: number = 0;
-    let x: number = 0;
-    while(i < s.length) {
-        let row = [];
-        for(let n:number = 0; n < numRows; n++) {
-            if (s[i] === undefined) {
-                row.push('');
-            } else {
-                row.push(s[i]);
-            }
-            i++;
-        }
-        result.push(row);
-        
-        // numRows - 2 回行う
-        let h = 0;
-        for (let m: number = 0; m < numRows - 2; m++) {
-           row = [];
-            for(let a:number = 0; a < numRows; a++) {
-                // -1ずつ増える
-                console.log(h);
-                if (a === numRows - 2 + h && s[i] !== undefined) {
-                    row.push(s[i]);
-                    i++;
-                } else {
-                    row.push('');
-                }
-            }
-            h--;
-            result.push(row); 
-        }
-        
-        
-    }
-    console.log(result);
     
-    let rs = '';
-    for(let b = 0; b < numRows; b++) {
-        for(let a = 0; a < result.length; a++) {
-            rs += result[a].shift()
-        } 
+    let convertRows = [];
+    let p: number = 0;
+    let r: number = numRows - 1;
+    
+    while(p < s.length) { 
+        if (r === 0) r = numRows - 1;
+        
+        for(let i: number = 0; i < numRows; i++) {
+            if (convertRows[i] === undefined) convertRows[i] = [];
+            
+            let v: string = (s[p] === undefined) ? '' : s[p];
+
+            if (r === 0 || r === numRows - 1) {
+                convertRows[i].push(v);
+                p++;
+            } else if (i === r) {
+                convertRows[i].push(v);
+                p++;
+            } else {
+                convertRows[i].push('');
+            }
+        }
+        r--;
+    }
+    
+    let rs: string = '';
+    for(let j: number = 0; j < convertRows.length; j++) {
+        //rs += convertRows[j].join('');
     }
 
-    //console.log(result);
     return rs;
+
 };
