@@ -15,12 +15,13 @@ function convert(s: string, numRows: number): string {
         result.push(row);
         
         // numRows - 2 回行う
+        let h = 0;
         for (let m: number = 0; m < numRows - 2; m++) {
            row = [];
-            let h = 0;
-            for(let n:number = 0; n < numRows; n++) {
+            for(let a:number = 0; a < numRows; a++) {
                 // -1ずつ増える
-                if (n === numRows - 2 + h && s[i] !== undefined) {
+                console.log(h);
+                if (a === numRows - 2 + h && s[i] !== undefined) {
                     row.push(s[i]);
                     i++;
                 } else {
@@ -33,6 +34,7 @@ function convert(s: string, numRows: number): string {
         
         
     }
+    console.log(result);
     
     let rs = '';
     for(let b = 0; b < numRows; b++) {
@@ -41,7 +43,6 @@ function convert(s: string, numRows: number): string {
         } 
     }
 
-    console.log(result);
-    console.log(rs);
+    //console.log(result);
     return rs;
 };
