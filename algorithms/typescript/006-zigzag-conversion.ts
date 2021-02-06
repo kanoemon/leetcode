@@ -1,25 +1,20 @@
 function convert(s: string, numRows: number): string {
+    if (numRows === 1) return s;
     
-    let convertRows = [];
-    let p: number = 0;
-    let lastRow: number = numRows - 1;
-    let r: number = lastRow;
+    let convertRows: string[] = new Array(numRows),
+        p: number = 0,
+        curRow: number = 0,
+        up: boolean = true;
     
-    while(p < s.length) { 
-        if (r === 0) r = lastRow;
+    while(p < s.length) {
+        if (convertRows[curRow] === undefined) convertRows[curRow] = '';
         
-        for(let i: number = 0; i < numRows; i++) {
-            if (convertRows[i] === undefined) convertRows[i] = '';
-            
-            if (s[p] === undefined) break;
-
-            if (r === lastRow || r === i) {
-                convertRows[i] += s[p];
-                p++;
-            }
-        }
-        r--;
+        convertRows[curRow] += s[p];
+        if (curRow === 0 || curRow === numRows - 1) up = !up;
+        
+        curRow += up ? -1 : 1;
+        p++;
     }
-    
+
     return convertRows.join('');
 };
