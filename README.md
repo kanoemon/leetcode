@@ -8,6 +8,7 @@
 |4|[Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)|[TypeScript](https://github.com/kanoemon/leetcode/blob/main/algorithms/typescript/004-median-of-two-sorted-arrays.ts)|Hard|
 |5|[Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)|[TypeScript](https://github.com/kanoemon/leetcode/blob/main/algorithms/typescript/005-longest-palindromic-substring.ts)|Medium|
 |6|[ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/)|[TypeScript](https://github.com/kanoemon/leetcode/blob/main/algorithms/typescript/006-zigzag-conversion.ts)|Medium|
+|7|[Reverse Integer](https://leetcode.com/problems/reverse-integer/)|[TypeScript](https://github.com/kanoemon/leetcode/blob/main/algorithms/typescript/007-reverse-integer.ts)|Easy|
 
 ## Database
 |*#*|Title|Solution|Difficulty|
